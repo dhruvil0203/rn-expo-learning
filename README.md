@@ -1,56 +1,124 @@
-# Welcome to your Expo app 👋
+# Expo Router Demo App 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A **React Native** application built with [Expo](https://expo.dev) and [Expo Router](https://docs.expo.dev/router/introduction/) to demonstrate **file-based routing** — including route groups, dynamic routes, catch-all routes, and authentication flows.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- **File-based routing** powered by Expo Router
+- **Route groups** — `(root)` for main app screens, `(auth)` for authentication
+- **Dynamic routes** — `/user/[user]`, `/products/[products]`
+- **Catch-all routes** — `/docs/[...slug]` for deeply nested paths
+- **Nested layouts** — shared UI via `_layout.tsx` at each level
+- **Authentication screens** — Sign In & Sign Up with shared header/footer layout
+- **Stack navigation** with hidden headers for a clean UI
+
+## 📁 Project Structure
+
+```
+src/app/
+├── _layout.tsx                    # Root layout (Stack navigator)
+├── (auth)/                        # Auth route group
+│   ├── _layout.tsx                # Auth layout (Slot with header/footer)
+│   ├── sign-in.tsx                # Sign In screen
+│   └── sign-up.tsx                # Sign Up screen
+└── (root)/                        # Main app route group
+    ├── _layout.tsx                # Root group layout (Stack navigator)
+    ├── index.tsx                  # Home screen (/)
+    ├── about.tsx                  # About page (/about)
+    ├── contact.tsx                # Contact page (/contact)
+    ├── [user].tsx                 # Dynamic user route (/user/:user)
+    ├── overview/
+    │   ├── index.tsx              # Overview page (/overview)
+    │   └── user.tsx               # Overview user page (/overview/user)
+    ├── products/
+    │   └── [products].tsx         # Dynamic product route (/products/:products)
+    └── user/
+        └── [user].tsx             # User profile route (/user/:user)
+```
+
+## 🛠️ Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| **Expo** | ~55.0.17 | Development platform |
+| **Expo Router** | ~55.0.13 | File-based routing |
+| **React** | 19.2.0 | UI library |
+| **React Native** | 0.83.6 | Cross-platform framework |
+| **React Navigation** | 7.x | Navigation primitives |
+| **React Native Reanimated** | 4.2.1 | Animations |
+| **TypeScript** | ~5.9.2 | Type safety |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- Android Studio (for Android emulator) or Xcode (for iOS simulator)
+- Or install [Expo Go](https://expo.dev/go) on your physical device
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/<your-username>/expo-router-demo.git
+   cd expo-router-demo/my-app
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Start the development server**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Open the app** using one of:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - 📱 Scan the QR code with [Expo Go](https://expo.dev/go) (Android/iOS)
+   - 🤖 Press `a` to open in Android emulator
+   - 🍎 Press `i` to open in iOS simulator
+   - 🌐 Press `w` to open in web browser
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📖 Routing Concepts Demonstrated
 
-## Get a fresh project
+### Route Groups
 
-When you're ready, run:
+Route groups `(root)` and `(auth)` organize screens without affecting the URL structure. Each group has its own `_layout.tsx` for shared UI.
 
-```bash
-npm run reset-project
-```
+### Dynamic Routes
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- **`/user/123`** → `[user].tsx` captures `123` as a parameter
+- **`/products/iphone`** → `[products].tsx` captures `iphone` as a parameter
 
-### Other setup steps
+### Catch-All Routes
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- **`/docs/feature/intro/part1`** → `[...slug].tsx` captures the entire path as an array
 
-## Learn more
+### Nested Layouts
 
-To learn more about developing your project with Expo, look at the following resources:
+- The `(auth)` group uses a `Slot` layout with a shared Header and Footer
+- The `(root)` group uses a `Stack` navigator with hidden headers
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📜 Available Scripts
 
-## Join the community
+| Script | Command | Description |
+|---|---|---|
+| Start | `npm start` | Start the Expo dev server |
+| Android | `npm run android` | Start on Android |
+| iOS | `npm run ios` | Start on iOS |
+| Web | `npm run web` | Start on web |
+| Lint | `npm run lint` | Run ESLint |
+| Reset | `npm run reset-project` | Reset to a blank project |
 
-Join our community of developers creating universal apps.
+## 📚 Learn More
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Documentation](https://docs.expo.dev/)
+- [Expo Router Docs](https://docs.expo.dev/router/introduction/)
+- [React Navigation](https://reactnavigation.org/)
+- [Learn Expo Tutorial](https://docs.expo.dev/tutorial/introduction/)
